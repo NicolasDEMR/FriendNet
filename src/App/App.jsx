@@ -5,6 +5,7 @@ import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
 import Settings from "../Components/Settings/Settings";
 import User from "../Components/User/User";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
