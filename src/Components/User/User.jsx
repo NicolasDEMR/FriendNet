@@ -1,4 +1,6 @@
 import "./User.css";
+import Menu from "../../Layouts/Menu/Menu";
+import Footer from "../../Layouts/Footer/Footer";
 
 function User() {
   return (

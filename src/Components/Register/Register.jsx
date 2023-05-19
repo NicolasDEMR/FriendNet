@@ -1,4 +1,6 @@
 import "./Register.css";
+import Menu from "../../Layouts/Menu/Menu";
+import Footer from "../../Layouts/Footer/Footer";
 
 function Register() {
   return (

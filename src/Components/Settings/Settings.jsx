@@ -1,4 +1,6 @@
 import "./Settings.css";
+import Menu from "../../Layouts/Menu/Menu";
+import Footer from "../../Layouts/Footer/Footer";
 
 function Settings() {
   return (
