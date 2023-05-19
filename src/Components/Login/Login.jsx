@@ -8,7 +8,7 @@ function Login() {
       <div className='menuWrapper'>
         <Menu />
       </div>
-      <div className='d-flex justify-content-center'>
+      <div className='d-flex justify-content-center mt-5'>
         <form className='d-flex flex-column w-50 justify-content-center'>
           <div className='mb-3'>
             <label htmlFor='exampleInputEmail1' className='form-label'>
