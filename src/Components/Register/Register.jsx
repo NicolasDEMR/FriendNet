@@ -1,7 +1,6 @@
 import "./Register.css";
 import Menu from "../../Layouts/Menu/Menu";
 import Footer from "../../Layouts/Footer/Footer";
-import { Link, Router } from "react-router-dom";
 
 function Register() {
   return (
@@ -59,9 +58,6 @@ function Register() {
           </div>
           <p className="text-end mt-2">
             <a href=""> Forgot Password?</a>
-            <Link to="/signup" className="ms-2">
-              Sign up
-            </Link>
           </p>
         </form>
       </div>
