@@ -5,63 +5,54 @@ import Footer from "../../Layouts/Footer/Footer";
 function Register() {
   return (
     <div>
-      <div className="menuWrapper">
+      <div className='menuWrapper'>
         <Menu />
       </div>
-      <div className="register">
-        <form>
-          <h3>Sign Up</h3>
-          <div className="Inscription">
-            <label htmlFor="fname">First Name</label>
+      <div className='d-flex justify-content-center mt-5'>
+        <form className='d-flex flex-column w-50 justify-content-center'>
+          <div className='mb-2 d-flex gap-1'>
             <input
-              type="text"
-              placeholder="Enter First Name"
-              className="form-control"
-            ></input>
-          </div>
-          <div className="Inscription">
-            <label htmlFor="lname">Last Name</label>
-            <input
-              type="text"
-              placeholder="Enter Last Name"
-              className="form-control"
-            ></input>
-          </div>
-          <div className="Inscription">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              placeholder="Enter Email"
-              className="form-control"
-            ></input>
-          </div>
-          <div className="Inscription">
-            <label htmlFor="password">Password</label>
-            <input
-              type="text"
-              placeholder="Enter Password"
-              className="form-control"
-            ></input>
-          </div>
-          <div className="Inscription">
-            <input
-              type="checkbox"
-              className="custom control custom-checkbox"
-              id="check"
+              type='text'
+              className='form-control'
+              id='exampleInputName2'
+              aria-describedby='First Name'
+              placeholder='First Name'
             />
-            <label htmlFor="check" className="custom-input-label ms2">
-              Remember me
-            </label>
+            <input
+              type='text'
+              className='form-control'
+              id='exampleInputName1'
+              aria-describedby='Name'
+              placeholder='Name'
+            />
           </div>
-          <div className="d-grid">
-            <button className="btn btn primary">Sign in</button>
+          <div className='mb-3'>
+            <input
+              type='email'
+              className='form-control'
+              id='exampleInputEmail1'
+              aria-describedby='emailHelp'
+              placeholder='Email'
+            />
+            <div id='emailHelp' className='form-text'>
+              We'll never share your email with anyone else.
+            </div>
           </div>
-          <p className="text-end mt-2">
-            <a href=""> Forgot Password?</a>
-          </p>
+          <div className='mb-3'>
+            <input
+              type='password'
+              className='form-control'
+              id='exampleInputPassword1'
+              placeholder='Password'
+            />
+          </div>
+          <div className='mb-3'></div>
+          <button type='submit' className='btn btn-primary'>
+            Register
+          </button>
         </form>
       </div>
-      <div className="footerWrapper">
+      <div className='footerWrapper'>
         <Footer />
       </div>
     </div>
