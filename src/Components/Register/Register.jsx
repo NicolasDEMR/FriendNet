@@ -38,16 +38,66 @@ function Register() {
               We'll never share your email with anyone else.
             </div>
           </div>
-          <div className='mb-3'>
+          <div className='mb-1'>
             <input
               type='password'
               className='form-control'
               id='exampleInputPassword1'
               placeholder='Password'
             />
+            <label htmlFor='exampleInputEmail1' className='form-label'>
+              Birthday
+            </label>
+            <input
+              type='date'
+              className='form-control'
+              id='exampleInputDate'
+              aria-describedby='dateHelp'
+            />
+            <p>Gender</p>
+          </div>
+          <div className=' mb-3'>
+            <div className='form-check form-check-inline mb-0 me-4'>
+              <input
+                className='form-check-input'
+                type='radio'
+                name='inlineRadioOptions'
+                id='femaleGender'
+                value='option1'
+              />
+              <label className='form-check-label' htmlFor='femaleGender'>
+                Female
+              </label>
+            </div>
+
+            <div className='form-check form-check-inline mb-0 me-4'>
+              <input
+                className='form-check-input'
+                type='radio'
+                name='inlineRadioOptions'
+                id='maleGender'
+                value='option2'
+              />
+              <label className='form-check-label' htmlFor='maleGender'>
+                Male
+              </label>
+            </div>
+
+            <div className='form-check form-check-inline mb-0'>
+              <input
+                className='form-check-input'
+                type='radio'
+                name='inlineRadioOptions'
+                id='otherGender'
+                value='option3'
+              />
+              <label className='form-check-label' htmlFor='otherGender'>
+                Other
+              </label>
+            </div>
           </div>
           <div className='mb-3'></div>
-          <button type='submit' className='btn btn-primary'>
+          <button type='submit' className='btn btn-dark'>
             Register
           </button>
         </form>
