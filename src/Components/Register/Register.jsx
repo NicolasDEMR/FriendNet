@@ -4,7 +4,7 @@ import Footer from "../../Layouts/Footer/Footer";
 import { useEffect, useState } from "react";
 
 function Register() {
-  const [data, setData] = useState();
+  const [data, setData] = useState({});
 
   const getData = (e) => {
     e.preventDefault();
@@ -17,6 +17,29 @@ function Register() {
       return;
     }
     setData(Object.fromEntries(formData));
+
+    sendDataAPI();
+  };
+
+  const sendDataAPI = async () => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: data.email,
+        password: data.password,
+        firstname: data.firstname,
+        lastname: data.name,
+      }),
+    };
+    const response = await fetch(
+      `https://social-network-api.osc-fr1.scalingo.io/friend-net/register`,
+      options
+    );
+    const donnees = await response.json();
+    console.log("API Response", donnees);
   };
 
   useEffect(() => {
