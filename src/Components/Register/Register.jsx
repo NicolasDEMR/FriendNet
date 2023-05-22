@@ -9,13 +9,6 @@ function Register() {
   const getData = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const formValues = [...formData.values()];
-    const isEmpty = formValues.includes("");
-
-    if (isEmpty) {
-      alert("Please make sure all fields are filled");
-      return;
-    }
     setData(Object.fromEntries(formData));
 
     sendDataAPI();
@@ -40,6 +33,10 @@ function Register() {
     );
     const donnees = await response.json();
     console.log("API Response", donnees);
+
+    if (donnees.success == false) {
+      alert(donnees.message);
+    }
   };
 
   useEffect(() => {
