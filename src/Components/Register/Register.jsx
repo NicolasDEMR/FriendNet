@@ -4,21 +4,17 @@ import Footer from "../../Layouts/Footer/Footer";
 import { useEffect, useState } from "react";
 
 function Register() {
-  const [data, setData] = useState({});
-  const [arrayData, setArrayData] = useState([]);
+  const [data, setData] = useState();
 
   const getData = (e) => {
     e.preventDefault();
-    setData(new FormData());
-    setArrayData([...arrayData, data]);
+    const formData = new FormData(e.currentTarget);
+    setData(formData);
   };
 
   useEffect(() => {
-    console.log("Données du formulaire : ", data);
+    console.log("data : ", data);
   }, [data]);
-  useEffect(() => {
-    console.log("Objets dans le tableau : ", arrayData);
-  }, [arrayData]);
 
   return (
     <div>
@@ -33,6 +29,7 @@ function Register() {
           <div className="mb-2 d-flex gap-1">
             <input
               type="text"
+              name="firstname"
               className="form-control border border-dark"
               id="exampleInputName2"
               aria-describedby="First Name"
@@ -40,6 +37,7 @@ function Register() {
             />
             <input
               type="text"
+              name="name"
               className="form-control border border-dark"
               id="exampleInputName1"
               aria-describedby="Name"
@@ -49,6 +47,7 @@ function Register() {
           <div className="mb-3">
             <input
               type="email"
+              name="email"
               className="form-control border border-dark"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
@@ -61,6 +60,7 @@ function Register() {
           <div className="mb-1 ">
             <input
               type="password"
+              name="password"
               className="form-control border border-dark"
               id="exampleInputPassword1"
               placeholder="Password"
@@ -70,6 +70,7 @@ function Register() {
             </label>
             <input
               type="date"
+              name="birthday"
               className="form-control border border-dark"
               id="exampleInputDate"
               aria-describedby="dateHelp"
@@ -81,7 +82,7 @@ function Register() {
               <input
                 className="form-check-input border border-dark"
                 type="radio"
-                name="inlineRadioOptions"
+                name="gender"
                 id="femaleGender"
                 value="option1"
               />
@@ -94,7 +95,7 @@ function Register() {
               <input
                 className="form-check-input border border-dark"
                 type="radio"
-                name="inlineRadioOptions"
+                name="gender"
                 id="maleGender"
                 value="option2"
               />
@@ -107,7 +108,7 @@ function Register() {
               <input
                 className="form-check-input border border-dark"
                 type="radio"
-                name="inlineRadioOptions"
+                name="gender"
                 id="otherGender"
                 value="option3"
               />
