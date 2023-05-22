@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "../Components/Home/Home";
+import HomeLogged from "../Components/HomeLogged/HomeLogged";
 import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
 import Settings from "../Components/Settings/Settings";
@@ -13,6 +14,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/home" element={<HomeLogged />} />
           <Route path="/user" element={<User />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/register" element={<Register />} />

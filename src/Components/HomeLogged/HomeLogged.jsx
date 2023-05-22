@@ -1,9 +1,9 @@
-import "./Home.css";
+import "./HomeLogged.css";
 import Menu from "../../Layouts/Menu/Menu";
 import Footer from "../../Layouts/Footer/Footer";
 import { useEffect, useState } from "react";
 import Post from "../../Layouts/Post/Post";
-function Home() {
+function HomeLogged() {
   const [post, setPost] = useState([
     {
       content: "https://storage.googleapis.com/pod_public/1300/150288.jpg",
@@ -27,12 +27,12 @@ function Home() {
     },
   ]);
 
-  const updateComment = () => {
-    alert("Please log in to comment");
+  const updateComment = (key) => {
+    setPost([...post], (post[key].comment += key.target.value));
   };
 
-  const updateLike = () => {
-    alert("Please log in to like a post");
+  const updateLike = (key) => {
+    setPost([...post], (post[key].likes += 1));
   };
 
   const displayPost = () => {
@@ -44,8 +44,8 @@ function Home() {
           author={e.author}
           like={e.likes}
           comment={e.comment}
-          handleClick={() => updateLike()}
-          handleComment={() => updateComment()}
+          handleClick={() => updateLike(key)}
+          handleComment={() => updateComment(key)}
         />
       );
     });
@@ -64,4 +64,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomeLogged;
