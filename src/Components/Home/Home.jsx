@@ -4,32 +4,31 @@ import Footer from "../../Layouts/Footer/Footer";
 import { useEffect, useState } from "react";
 import Post from "../../Layouts/Post/Post";
 function Home() {
-  const [comment, setComment] = useState("");
   const [post, setPost] = useState([
     {
       content: "https://storage.googleapis.com/pod_public/1300/150288.jpg",
       author: "Elon Musk",
       likes: 0,
-      comment: 0,
+      comment: "",
     },
     {
       content:
         "https://i.pinimg.com/736x/91/f1/52/91f152382ff471e36bbe95625d682801.jpg",
       author: "Elon Musk",
       likes: 0,
-      comment: 0,
+      comment: "",
     },
     {
       content:
         "https://image.winudf.com/v2/image1/Y29tLkFlc3RoZXRpYy5HaXJseS53YWxscGFwZXJfc2NyZWVuXzFfMTYyNTk1MzAzMF8wMTY/screen-1.webp?fakeurl=1&type=.webp",
       author: "",
       likes: 0,
-      comment: 0,
+      comment: "",
     },
   ]);
 
   const updateComment = (key) => {
-    setComment([...comment], (comment[key].comment += ""));
+    setPost([...post], (post[key].comment += key.target.value));
   };
 
   const updateLike = (key) => {
