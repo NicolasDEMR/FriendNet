@@ -6,19 +6,16 @@ import Post from "../../Layouts/Post/Post";
 function Home() {
   const [post, setPost] = useState([
     {
-      title: "My rocket",
       content: "Look, I built a new rocket",
       author: "Elon Musk",
       likes: 0,
     },
     {
-      title: "My rocket",
       content: "Look, I built a new rocket",
       author: "Elon Musk",
       likes: 0,
     },
     {
-      title: "My rocket",
       content: "Look, I built a new rocket",
       author: "Elon Musk",
       likes: 0,
@@ -34,7 +31,6 @@ function Home() {
       return (
         <Post
           key={key}
-          title={e.title}
           content={e.content}
           author={e.author}
           like={e.likes}
