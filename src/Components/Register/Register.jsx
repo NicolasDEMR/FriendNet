@@ -33,14 +33,14 @@ function Register() {
           <div className="mb-2 d-flex gap-1">
             <input
               type="text"
-              className="form-control"
+              className="form-control border border-dark"
               id="exampleInputName2"
               aria-describedby="First Name"
               placeholder="First Name"
             />
             <input
               type="text"
-              className="form-control"
+              className="form-control border border-dark"
               id="exampleInputName1"
               aria-describedby="Name"
               placeholder="Name"
@@ -49,7 +49,7 @@ function Register() {
           <div className="mb-3">
             <input
               type="email"
-              className="form-control"
+              className="form-control border border-dark"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Email"
@@ -58,28 +58,28 @@ function Register() {
               We'll never share your email with anyone else.
             </div>
           </div>
-          <div className="mb-1">
+          <div className="mb-1 ">
             <input
               type="password"
-              className="form-control"
+              className="form-control border border-dark"
               id="exampleInputPassword1"
               placeholder="Password"
             />
-            <label htmlFor="exampleInputEmail1" className="form-label">
+            <label htmlFor="exampleInputEmail1" className="form-label ">
               Birthday
             </label>
             <input
               type="date"
-              className="form-control"
+              className="form-control border border-dark"
               id="exampleInputDate"
               aria-describedby="dateHelp"
             />
             <p>Gender</p>
           </div>
-          <div className=" mb-3">
+          <div className=" mb-3 ">
             <div className="form-check form-check-inline mb-0 me-4">
               <input
-                className="form-check-input"
+                className="form-check-input border border-dark"
                 type="radio"
                 name="inlineRadioOptions"
                 id="femaleGender"
@@ -92,7 +92,7 @@ function Register() {
 
             <div className="form-check form-check-inline mb-0 me-4">
               <input
-                className="form-check-input"
+                className="form-check-input border border-dark"
                 type="radio"
                 name="inlineRadioOptions"
                 id="maleGender"
@@ -105,7 +105,7 @@ function Register() {
 
             <div className="form-check form-check-inline mb-0">
               <input
-                className="form-check-input"
+                className="form-check-input border border-dark"
                 type="radio"
                 name="inlineRadioOptions"
                 id="otherGender"

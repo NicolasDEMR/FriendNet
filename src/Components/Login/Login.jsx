@@ -5,47 +5,47 @@ import Footer from "../../Layouts/Footer/Footer";
 function Login() {
   return (
     <div>
-      <div className='menuWrapper'>
+      <div className="menuWrapper">
         <Menu />
       </div>
-      <div className='d-flex justify-content-center mt-5'>
-        <form className='d-flex flex-column w-50 justify-content-center'>
-          <div className='mb-3'>
+      <div className="d-flex justify-content-center mt-5">
+        <form className="d-flex flex-column w-50 justify-content-center">
+          <div className="mb-3">
             <input
-              type='email'
-              className='form-control'
-              id='exampleInputEmail1'
-              aria-describedby='emailHelp'
-              placeholder='Email'
+              type="email"
+              className="form-control border border-dark"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Email"
             />
-            <div id='emailHelp' className='form-text'>
+            <div id="emailHelp" className="form-text ">
               We'll never share your email with anyone else.
             </div>
           </div>
-          <div className='mb-3'>
+          <div className="mb-3">
             <input
-              type='password'
-              className='form-control'
-              id='exampleInputPassword1'
-              placeholder='Password'
+              type="password"
+              className="form-control border border-dark"
+              id="exampleInputPassword1"
+              placeholder="Password"
             />
           </div>
-          <div className='mb-3 form-check'>
+          <div className="mb-3 form-check">
             <input
-              type='checkbox'
-              className='form-check-input'
-              id='exampleCheck1'
+              type="checkbox"
+              className="form-check-input border border-dark"
+              id="exampleCheck1"
             />
-            <label className='form-check-label' htmlFor='exampleCheck1'>
+            <label className="form-check-label " htmlFor="exampleCheck1">
               Check me out
             </label>
           </div>
-          <button type='submit' className='btn btn-dark '>
+          <button type="submit" className="btn btn-dark ">
             Submit
           </button>
         </form>
       </div>
-      <div className='footerWrapper'>
+      <div className="footerWrapper">
         <Footer />
       </div>
     </div>
