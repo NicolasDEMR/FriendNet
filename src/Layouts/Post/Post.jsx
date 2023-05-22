@@ -2,9 +2,8 @@ import "./Post.css";
 
 function Post(props) {
   return (
-    <div className="containerPost bg-dark text-light ms-5 me-5">
-      <h3>{props.title}</h3>
-      <p>{props.content}</p>
+    <div className="containerPost bg-dark text-light ms-5 me-5 pb-2">
+      <img src={props.content} className="img-fluid rounded w-25 mt-2" />
       <p>
         <i>{props.author}</i>
       </p>
