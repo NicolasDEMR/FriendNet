@@ -8,7 +8,12 @@ function Post(props) {
       <p>
         <i>{props.author}</i>
       </p>
-      <button onClick={props.handleClick}>👍{props.like}</button>
+      <button
+        className="border border-0 rounded-pill "
+        onClick={props.handleClick}
+      >
+        👍{props.like}
+      </button>
     </div>
   );
 }

@@ -49,7 +49,7 @@ function Home() {
       <div className="menuWrapper">
         <Menu />
       </div>
-      <div className="containerApp">{displayPost()}</div>;
+      <div className="containerApp">{displayPost()}</div>
       <div className="footerWrapper">
         <Footer />
       </div>
