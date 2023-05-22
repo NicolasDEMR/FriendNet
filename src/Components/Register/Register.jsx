@@ -2,6 +2,7 @@ import "./Register.css";
 import Menu from "../../Layouts/Menu/Menu";
 import Footer from "../../Layouts/Footer/Footer";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [data, setData] = useState({});
@@ -36,7 +37,40 @@ function Register() {
 
     if (donnees.success == false) {
       alert(donnees.message);
+    } else {
+      sendDataLoginAPI();
     }
+  };
+
+  const sendDataLoginAPI = async () => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: data.email,
+        password: data.password,
+      }),
+    };
+    const response = await fetch(
+      `https://social-network-api.osc-fr1.scalingo.io/friend-net/login`,
+      options
+    );
+    const donnees = await response.json();
+    console.log("API Response", donnees);
+
+    if (donnees.success == false) {
+      alert(donnees.message);
+    } else {
+      redirectProfile();
+    }
+  };
+
+  let navigate = useNavigate();
+  const redirectProfile = () => {
+    let path = "/user";
+    navigate(path);
   };
 
   useEffect(() => {

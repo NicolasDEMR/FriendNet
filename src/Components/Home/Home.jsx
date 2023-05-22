@@ -27,6 +27,7 @@ function Home() {
       comment: 0,
     },
   ]);
+
   const updateComment = (key) => {
     setComment([...comment], (comment[key].comment += ""));
   };
