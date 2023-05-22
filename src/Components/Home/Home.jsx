@@ -6,20 +6,19 @@ import Post from "../../Layouts/Post/Post";
 function Home() {
   const [post, setPost] = useState([
     {
-      title: "My rocket",
-      content: "Look, I built a new rocket",
+      content: "https://storage.googleapis.com/pod_public/1300/150288.jpg",
       author: "Elon Musk",
       likes: 0,
     },
     {
-      title: "My rocket",
-      content: "Look, I built a new rocket",
+      content:
+        "https://i.pinimg.com/736x/91/f1/52/91f152382ff471e36bbe95625d682801.jpg",
       author: "Elon Musk",
       likes: 0,
     },
     {
-      title: "My rocket",
-      content: "Look, I built a new rocket",
+      content:
+        "https://image.winudf.com/v2/image1/Y29tLkFlc3RoZXRpYy5HaXJseS53YWxscGFwZXJfc2NyZWVuXzFfMTYyNTk1MzAzMF8wMTY/screen-1.webp?fakeurl=1&type=.webp",
       author: "Elon Musk",
       likes: 0,
     },
@@ -34,7 +33,6 @@ function Home() {
       return (
         <Post
           key={key}
-          title={e.title}
           content={e.content}
           author={e.author}
           like={e.likes}
