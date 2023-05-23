@@ -4,28 +4,27 @@ import Footer from "../../Layouts/Footer/Footer";
 import { useEffect, useState } from "react";
 import Post from "../../Layouts/Post/Post";
 function HomeLogged() {
-  const [post, setPost] = useState([
-    {
-      content: "https://storage.googleapis.com/pod_public/1300/150288.jpg",
-      author: "Elon Musk",
-      likes: 0,
-      comment: "",
-    },
-    {
-      content:
-        "https://i.pinimg.com/736x/91/f1/52/91f152382ff471e36bbe95625d682801.jpg",
-      author: "Elon Musk",
-      likes: 0,
-      comment: "",
-    },
-    {
-      content:
-        "https://image.winudf.com/v2/image1/Y29tLkFlc3RoZXRpYy5HaXJseS53YWxscGFwZXJfc2NyZWVuXzFfMTYyNTk1MzAzMF8wMTY/screen-1.webp?fakeurl=1&type=.webp",
-      author: "",
-      likes: 0,
-      comment: "",
-    },
-  ]);
+  const [content, setContent] = useState("");
+  const [post, setPost] = useState([{}]);
+
+  const getPosts = async () => {
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(
+      "https://social-network-api.osc-fr1.scalingo.io/friend-net/posts?page=0&limit=10",
+      options
+    );
+    const data = await response.json();
+    if (data.success == false) {
+      alert(data.message);
+    } else {
+      console.log("data getPost : ", data);
+    }
+  };
 
   const updateComment = (key) => {
     setPost([...post], (post[key].comment += key.target.value));
@@ -51,18 +50,67 @@ function HomeLogged() {
     });
   };
 
-  const addPost = (e) => {
-    const getImg = e.target.value;
-    console.log("image upload : ", getImg);
+  const getUser = async () => {
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    const response = await fetch(
+      "https://social-network-api.osc-fr1.scalingo.io/friend-net/user",
+      options
+    );
+    const data = await response.json();
+    if (data.success == false) {
+      alert(data.message);
+    } else {
+      console.log("data getUser : ", data);
+      addPost(data);
+    }
+  };
+
+  const getContent = (e) => {
+    setContent(e.target.value);
+  };
+
+  const addPost = (dataUser) => {
     setPost([
       ...post,
       {
-        content: URL.createObjectURL(getImg),
-        author: "",
+        title: "",
+        content: content,
+        author: `${dataUser.firstname} ${dataUser.lastname}`,
         likes: 0,
         comment: "",
       },
     ]);
+    sendInAPI();
+  };
+
+  const sendInAPI = async () => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        title: post.title,
+        content: post.content,
+      }),
+    };
+    const response = await fetch(
+      "https://social-network-api.osc-fr1.scalingo.io/friend-net/post",
+      options
+    );
+    const data = await response.json();
+    if (data.success == false) {
+      alert(data.message);
+    } else {
+      console.log("data sendInAPI : ", data);
+    }
   };
 
   useEffect(() => {
@@ -76,16 +124,25 @@ function HomeLogged() {
       </div>
       <div className="p-3 mb-2 bg-dark text-white d-grid gap-2 col-6 mx-auto">
         Post
-        <div className="input-group mb-3">
+        <div className="input-group mb-3 d-flex gap-2">
           <input
-            type="file"
-            className="form-control"
-            id="inputGroupFile01"
-            onChange={addPost}
+            type="text"
+            name="content"
+            className="form-control rounded-pill"
+            id="inputText01"
+            onChange={getContent}
+          />
+          <input
+            type="submit"
+            className="btn btn-light btn-outline-dark rounded-pill"
+            onClick={getUser}
           />
         </div>
       </div>
-      <div className="containerApp">{displayPost()}</div>
+      <div className="containerApp">
+        {getPosts}
+        {displayPost()}
+      </div>
       <div className="footerWrapper">
         <Footer />
       </div>
