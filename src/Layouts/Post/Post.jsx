@@ -28,6 +28,7 @@ function Post(props) {
           className="border border-0 rounded-pill "
           onClick={props.handleComment}
         >
+          <input type="text" className=" border border-0 rounded-pill" />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
