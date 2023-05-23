@@ -36,6 +36,9 @@ function HomeLogged() {
 
   const displayPost = () => {
     return post.map((e, key) => {
+      if (key == 0) {
+        return null;
+      }
       return (
         <Post
           key={key}
