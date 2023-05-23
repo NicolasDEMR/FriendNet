@@ -51,7 +51,23 @@ function HomeLogged() {
     });
   };
 
-  const addPost = () => {};
+  const addPost = (e) => {
+    const getImg = e.target.value;
+    console.log("image upload : ", getImg);
+    setPost([
+      ...post,
+      {
+        content: URL.createObjectURL(getImg),
+        author: "",
+        likes: 0,
+        comment: "",
+      },
+    ]);
+  };
+
+  useEffect(() => {
+    console.log("tableau post : ", post);
+  }, [post]);
 
   return (
     <div>
@@ -61,7 +77,12 @@ function HomeLogged() {
       <div className="p-3 mb-2 bg-dark text-white d-grid gap-2 col-6 mx-auto">
         Post
         <div className="input-group mb-3">
-          <input type="file" className="form-control" id="inputGroupFile01" />
+          <input
+            type="file"
+            className="form-control"
+            id="inputGroupFile01"
+            onChange={addPost}
+          />
         </div>
       </div>
       <div className="containerApp">{displayPost()}</div>

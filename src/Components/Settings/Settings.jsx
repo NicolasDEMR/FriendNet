@@ -18,7 +18,7 @@ function Settings() {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "bearer token",
+        Authorization: `bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
         firstname: data.firstname,
@@ -38,21 +38,8 @@ function Settings() {
     if (donnees.success == false) {
       alert(donnees.message);
     } else {
-      setData(...data, Object.fromEntries(donnees));
-      displaySettings(donnees);
+      alert("Changed profile successfuly");
     }
-  };
-
-  const displaySettings = (e) => {
-    return (
-      <div className="d-flex flex-column w-50 justify-content-center">
-        <p>First Name : {e.firstname}</p>
-        <p>Name : {e.lastname}</p>
-        <p>Email : {e.email}</p>
-        <p>Age : {e.age}</p>
-        <p>Occupation : {e.occupation}</p>
-      </div>
-    );
   };
 
   useEffect(() => {
