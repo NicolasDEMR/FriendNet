@@ -3,6 +3,7 @@ import Menu from "../../Layouts/Menu/Menu";
 import Footer from "../../Layouts/Footer/Footer";
 import { useEffect, useState } from "react";
 import Post from "../../Layouts/Post/Post";
+import { Link } from "react-router-dom";
 function Home() {
   const [post, setPost] = useState([
     {
