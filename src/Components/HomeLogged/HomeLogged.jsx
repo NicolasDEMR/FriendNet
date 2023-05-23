@@ -58,13 +58,10 @@ function HomeLogged() {
       <div className="menuWrapper">
         <Menu />
       </div>
-      <div className="addPostWrapper p-3 mb-2 bg-dark text-white d-grid gap-2 col-6 mx-auto">
+      <div className="p-3 mb-2 bg-dark text-white d-grid gap-2 col-6 mx-auto">
         Post
         <div className="input-group mb-3">
-          <label className="input-group-text" for="inputGroupFile01">
-            Upload
-          </label>
-          <input type="file" class="form-control" id="inputGroupFile01" />
+          <input type="file" className="form-control" id="inputGroupFile01" />
         </div>
       </div>
       <div className="containerApp">{displayPost()}</div>
