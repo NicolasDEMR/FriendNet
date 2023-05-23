@@ -37,6 +37,9 @@ function Home() {
 
   const displayPost = () => {
     return post.map((e, key) => {
+      if (key == 0) {
+        return null;
+      }
       return (
         <Post
           key={key}
@@ -44,8 +47,8 @@ function Home() {
           author={e.author}
           like={e.likes}
           comment={e.comment}
-          handleClick={() => updateLike()}
-          handleComment={() => updateComment()}
+          handleClick={() => updateLike(key)}
+          handleComment={() => updateComment(key)}
         />
       );
     });
