@@ -7,55 +7,8 @@ function HomeLogged() {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [comment, setComment] = useState("");
-  const [post, setPost] = useState([{}]);
-
-  const getPosts = async () => {
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    const response = await fetch(
-      "https://social-network-api.osc-fr1.scalingo.io/friend-net/posts?page=0&limit=10",
-      options
-    );
-    const data = await response.json();
-    if (data.success == false) {
-      alert(data.message);
-    } else {
-      console.log("data getPost : ", data);
-    }
-  };
-
-  const updateComment = (key) => {
-    setPost([...post], (post[key].comment += comment));
-  };
-
-  const updateLike = (key) => {
-    setPost([...post], (post[key].likes += 1));
-  };
-
-  const displayPost = () => {
-    return post.map((e, key) => {
-      if (key == 0) {
-        return null;
-      }
-      return (
-        <Post
-          key={key}
-          title={e.title}
-          content={e.content}
-          author={e.author}
-          like={e.likes}
-          comment={e.comment}
-          handleClick={() => updateLike(key)}
-          getComment={() => getComment(e.value)}
-          handleComment={() => updateComment(key)}
-        />
-      );
-    });
-  };
+  const [user, setUser] = useState({});
+  const [post, setPost] = useState([]);
 
   const getUser = async () => {
     const options = {
@@ -70,13 +23,7 @@ function HomeLogged() {
       options
     );
     const data = await response.json();
-    if (data.success == false) {
-      alert(data.message);
-    } else {
-      console.log("data getUser : ", data);
-      addPost(data);
-      sendCommentAPI(data);
-    }
+    setUser(data);
   };
 
   const getTitle = (e) => {
@@ -91,21 +38,17 @@ function HomeLogged() {
     setComment(e.target.value);
   };
 
-  const addPost = (dataUser) => {
-    setPost([
-      ...post,
-      {
-        title: title,
-        content: content,
-        author: `${dataUser.firstname} ${dataUser.lastname}`,
-        likes: 0,
-        comment: "",
-      },
-    ]);
-    sendInAPI();
+  const updateComment = (key) => {
+    sendCommentAPI(user);
+    setPost([...post], (post[key].comment += comment));
   };
 
-  const sendInAPI = async () => {
+  const updateLike = (key) => {
+    sendLikeAPI(post[key]._id);
+    setPost([...post[key].likes]);
+  };
+
+  const sendPostAPI = async () => {
     const options = {
       method: "POST",
       headers: {
@@ -113,8 +56,8 @@ function HomeLogged() {
         Authorization: `bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
-        title: post.title,
-        content: post.content,
+        title: title,
+        content: content,
       }),
     };
     const response = await fetch(
@@ -122,15 +65,12 @@ function HomeLogged() {
       options
     );
     const data = await response.json();
-    console.log("data sendInAPI : ", data);
-    if (data.success == false) {
-      alert(data.message);
-    } else {
-      console.log("data sendInAPI : ", data);
-    }
+    console.log("sendPostAPI data : ", data);
+    getUser();
+    getPosts();
   };
 
-  const sendCommentAPI = async (dataID) => {
+  const sendLikeAPI = async (post) => {
     const options = {
       method: "POST",
       headers: {
@@ -138,7 +78,26 @@ function HomeLogged() {
         Authorization: `bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
-        postId: dataID._id,
+        postId: post._id,
+      }),
+    };
+    const response = await fetch(
+      "https://social-network-api.osc-fr1.scalingo.io/friend-net/post/like",
+      options
+    );
+    const data = await response.json();
+    console.log("data sendLikeAPI : ", data);
+  };
+
+  const sendCommentAPI = async (post) => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        postId: post._id,
         content: comment,
       }),
     };
@@ -148,19 +107,55 @@ function HomeLogged() {
     );
     const data = await response.json();
     console.log("data sendCommentAPI : ", data);
-    if (data.success == false) {
-      alert(data.message);
-    } else {
-      console.log("data sendCommentAPI : ", data);
-    }
+  };
+
+  const getPosts = async () => {
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(
+      "https://social-network-api.osc-fr1.scalingo.io/friend-net/posts?page=0&limit=20",
+      options
+    );
+    const data = await response.json();
+    console.log("data getPost : ", data);
+    setPost(data.posts);
+  };
+
+  const displayPost = () => {
+    return post.map((e, key) => {
+      if (key == 0) {
+        return null;
+      }
+      return (
+        <Post
+          key={key}
+          date={new Date().toDateString(e.date)}
+          title={e.title}
+          content={e.content}
+          author={`${e.firstname} ${e.lastname}`}
+          like={e.likes}
+          comment={e.comments}
+          handleClick={() => updateLike(key)}
+          getComment={(e) => getComment(e.value)}
+          handleComment={() => updateComment(key)}
+        />
+      );
+    });
   };
 
   useEffect(() => {
-    console.log("tableau post : ", post);
+    console.log("Array post : ", post);
   }, [post]);
   useEffect(() => {}, [title]);
   useEffect(() => {}, [content]);
   useEffect(() => {}, [comment]);
+  useEffect(() => {
+    console.log("user : ", user);
+  }, [user]);
 
   return (
     <div>
@@ -189,12 +184,11 @@ function HomeLogged() {
           <input
             type="submit"
             className="btn btn-light btn-outline-dark rounded-pill"
-            onClick={getUser}
+            onClick={sendPostAPI}
           />
         </div>
       </div>
-      <div className="containerApp">
-        {getPosts}
+      <div className="containerApp" onLoad={getPosts}>
         {displayPost()}
       </div>
       <div className="footerWrapper">
