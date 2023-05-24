@@ -36,7 +36,7 @@ function Register() {
     console.log("API Response", donnees);
 
     if (donnees.success == false) {
-      alert(donnees.message);
+      return null;
     } else {
       sendDataLoginAPI();
     }
@@ -61,7 +61,7 @@ function Register() {
     console.log("API Response", donnees);
 
     if (donnees.success == false) {
-      alert(donnees.message);
+      return null;
     } else {
       redirectProfile();
     }
@@ -74,9 +74,17 @@ function Register() {
   };
 
   useEffect(() => {
+    getData;
     console.log("data : ", data);
+  }, [setData, data]);
+
+  useEffect(() => {
+    sendDataAPI();
   }, [data]);
 
+  useEffect(() => {
+    sendDataLoginAPI();
+  }, []);
   return (
     <div>
       <div className="menuWrapper">
