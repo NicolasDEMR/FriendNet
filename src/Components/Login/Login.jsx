@@ -11,7 +11,6 @@ function Login() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     setData(Object.fromEntries(formData));
-    sendDataAPI();
   };
 
   const sendDataAPI = async () => {
@@ -33,7 +32,7 @@ function Login() {
     console.log("API Response", donnees);
 
     if (donnees.success == false) {
-      alert(donnees.message);
+      return null;
     } else {
       redirectProfile();
       getToken(donnees.token);
@@ -50,9 +49,13 @@ function Login() {
     localStorage.setItem("token", token);
   };
 
-  useEffect(() => {}, []);
   useEffect(() => {
+    getData;
     console.log("data : ", data);
+  }, [setData, data]);
+
+  useEffect(() => {
+    sendDataAPI();
   }, [data]);
 
   return (
