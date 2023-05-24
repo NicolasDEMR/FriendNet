@@ -117,11 +117,10 @@ function HomeLogged() {
       },
     };
     const response = await fetch(
-      "https://social-network-api.osc-fr1.scalingo.io/friend-net/posts?page=0&limit=20",
+      "https://social-network-api.osc-fr1.scalingo.io/friend-net/posts?page=0&limit=40",
       options
     );
     const data = await response.json();
-    console.log("data getPost : ", data);
     setPost(data.posts);
   };
 
@@ -148,13 +147,14 @@ function HomeLogged() {
   };
 
   useEffect(() => {
-    console.log("Array post : ", post);
-  }, [post]);
-  useEffect(() => {}, [title]);
-  useEffect(() => {}, [content]);
-  useEffect(() => {}, [comment]);
+    sendPostAPI;
+    // console.log("Array post : ", post);
+  }, []);
   useEffect(() => {
-    console.log("user : ", user);
+    getPosts();
+  }, []);
+  useEffect(() => {
+    getUser();
   }, [user]);
 
   return (
@@ -188,9 +188,7 @@ function HomeLogged() {
           />
         </div>
       </div>
-      <div className="containerApp" onLoad={getPosts}>
-        {displayPost()}
-      </div>
+      <div className="containerApp">{displayPost()}</div>
       <div className="footerWrapper">
         <Footer />
       </div>
