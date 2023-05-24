@@ -8,6 +8,9 @@ function Post(props) {
       <p>
         <i>{props.author}</i>
       </p>
+      <ul className="listeComment">
+        <li>{props.comment}</li>
+      </ul>
       <div className="d-flex gap-2 justify-content-center">
         <button
           className="border border-0 rounded-pill "
@@ -25,11 +28,16 @@ function Post(props) {
           </svg>
           {props.like}
         </button>
+        <input
+          type="text"
+          className=" border border-0 rounded-pill"
+          onChange={props.getComment}
+          value={props.value}
+        />
         <button
           className="border border-0 rounded-pill "
           onClick={props.handleComment}
         >
-          <input type="text" className=" border border-0 rounded-pill" />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
