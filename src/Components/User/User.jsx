@@ -23,15 +23,14 @@ function User() {
   };
 
   useEffect(() => {
-    getUser, console.log("user : ", user);
-  }, [user]);
+    getUser();
+  }, []);
 
   return (
     <div>
       <div className="menuWrapper">
         <Menu />
       </div>
-      <button onClick={getUser}>User</button>
       <div>
         <p>{user.firstname}</p>
         <p>{user.lastname}</p>
