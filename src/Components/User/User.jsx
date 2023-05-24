@@ -28,10 +28,10 @@ function User() {
 
   return (
     <div>
-      <div className="menuWrapper">
+      <div className="menuWrapper ">
         <Menu />
       </div>
-      <div className="border border-dark text-light bg-dark">
+      <div className="border border-dark text-light bg-dark mt-5">
         <p className="">firstname: {user.firstname}</p>
         <p>lastname: {user.lastname}</p>
         <p>email: {user.email}</p>
