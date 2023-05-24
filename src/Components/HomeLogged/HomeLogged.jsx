@@ -9,6 +9,7 @@ function HomeLogged() {
   const [comment, setComment] = useState("");
   const [user, setUser] = useState({});
   const [post, setPost] = useState([]);
+  const [like, setLike] = useState([{}]);
 
   const getUser = async () => {
     const options = {
@@ -44,8 +45,9 @@ function HomeLogged() {
   };
 
   const updateLike = (key) => {
+    console.log("key du post : ", post[key]._id);
     sendLikeAPI(post[key]._id);
-    setPost([...post[key].likes]);
+    // setPost([...post[key].likes], post[key].like);
   };
 
   const sendPostAPI = async () => {
@@ -70,7 +72,7 @@ function HomeLogged() {
     getPosts();
   };
 
-  const sendLikeAPI = async (post) => {
+  const sendLikeAPI = async (postID) => {
     const options = {
       method: "POST",
       headers: {
@@ -78,7 +80,7 @@ function HomeLogged() {
         Authorization: `bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
-        postId: post._id,
+        postId: postID,
       }),
     };
     const response = await fetch(
@@ -89,7 +91,7 @@ function HomeLogged() {
     console.log("data sendLikeAPI : ", data);
   };
 
-  const sendCommentAPI = async (post) => {
+  const sendCommentAPI = async (postID) => {
     const options = {
       method: "POST",
       headers: {
@@ -97,7 +99,7 @@ function HomeLogged() {
         Authorization: `bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
-        postId: post._id,
+        postId: postID,
         content: comment,
       }),
     };
@@ -124,24 +126,37 @@ function HomeLogged() {
     setPost(data.posts);
   };
 
+  const displayLike = () => {
+    return like.map((e, key) => {
+      return (
+        <div key={key}>
+          <p>
+            👍 {e.firstname} {e.lastname}
+          </p>
+        </div>
+      );
+    });
+  };
+
   const displayPost = () => {
     return post.map((e, key) => {
       if (key == 0) {
         return null;
       }
       return (
-        <Post
-          key={key}
-          date={new Date().toDateString(e.date)}
-          title={e.title}
-          content={e.content}
-          author={`${e.firstname} ${e.lastname}`}
-          like={e.likes}
-          comment={e.comments}
-          handleClick={() => updateLike(key)}
-          getComment={(e) => getComment(e.value)}
-          handleComment={() => updateComment(key)}
-        />
+        <div key={key}>
+          <Post
+            date={new Date().toDateString(e.date)}
+            title={e.title}
+            content={e.content}
+            author={`${e.firstname} ${e.lastname}`}
+            like={() => displayLike(key)}
+            comment={e.comments}
+            handleClick={() => updateLike(key)}
+            getComment={() => getComment(e.value)}
+            handleComment={() => updateComment(key)}
+          />
+        </div>
       );
     });
   };

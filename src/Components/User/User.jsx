@@ -40,24 +40,25 @@ function User() {
     setPost(data.posts);
   };
 
-  const displayRecent = () => {
+  const displayPost = () => {
     return post.map((e, key) => {
       if (key == 0) {
         return null;
       }
       return (
-        <Post
-          key={key}
-          date={new Date().toDateString(e.date)}
-          title={e.title}
-          content={e.content}
-          author={`${e.firstname} ${e.lastname}`}
-          like={e.likes}
-          comment={e.comments}
-          handleClick={() => updateLike(key)}
-          getComment={(e) => getComment(e.value)}
-          handleComment={() => updateComment(key)}
-        />
+        <div key={key}>
+          <Post
+            date={new Date().toDateString(e.date)}
+            title={e.title}
+            content={e.content}
+            author={`${e.firstname} ${e.lastname}`}
+            like={() => displayLike(key)}
+            comment={e.comments}
+            handleClick={() => updateLike(key)}
+            getComment={() => getComment(e.value)}
+            handleComment={() => updateComment(key)}
+          />
+        </div>
       );
     });
   };
@@ -68,7 +69,7 @@ function User() {
 
   useEffect(() => {
     getPosts();
-  }, [post]);
+  }, []);
 
   return (
     <div>
@@ -82,7 +83,7 @@ function User() {
         <p>age: {user.age}</p>
         <p>occupation: {user.occupation}</p>
       </div>
-      <div className="mt-5">{displayRecent()}</div>
+      <div className="mt-5">{displayPost()}</div>
       <div className="footerWrapper">
         <Footer />
       </div>

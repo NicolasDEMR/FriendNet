@@ -30,23 +30,37 @@ function Home() {
     alert("Please log in to like a post");
   };
 
+  const displayLike = () => {
+    return like.map((e, key) => {
+      return (
+        <div key={key}>
+          <p>
+            👍 {e.firstname} {e.lastname}
+          </p>
+        </div>
+      );
+    });
+  };
+
   const displayPost = () => {
     return post.map((e, key) => {
       if (key == 0) {
         return null;
       }
       return (
-        <Post
-          key={key}
-          date={new Date().toDateString(e.date)}
-          title={e.title}
-          content={e.content}
-          author={`${e.firstname} ${e.lastname}`}
-          like={e.likes}
-          comment={e.comments}
-          handleClick={() => updateLike(key)}
-          handleComment={() => updateComment(key)}
-        />
+        <div key={key}>
+          <Post
+            date={new Date().toDateString(e.date)}
+            title={e.title}
+            content={e.content}
+            author={`${e.firstname} ${e.lastname}`}
+            like={() => displayLike(key)}
+            comment={e.comments}
+            handleClick={() => updateLike(key)}
+            getComment={() => getComment(e.value)}
+            handleComment={() => updateComment(key)}
+          />
+        </div>
       );
     });
   };
