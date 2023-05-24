@@ -117,7 +117,7 @@ function HomeLogged() {
       },
     };
     const response = await fetch(
-      "https://social-network-api.osc-fr1.scalingo.io/friend-net/posts?page=0&limit=20",
+      "https://social-network-api.osc-fr1.scalingo.io/friend-net/posts?page=0&limit=50",
       options
     );
     const data = await response.json();

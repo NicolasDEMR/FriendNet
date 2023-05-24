@@ -9,3 +9,6 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+body {
+  background-color: rgba(255, 214, 138, 0.523);
+}

@@ -38,6 +38,7 @@ function User() {
         <p>age: {user.age}</p>
         <p>occupation: {user.occupation}</p>
       </div>
+      <div>les post les plus recents</div>
       <div className="footerWrapper">
         <Footer />
       </div>
