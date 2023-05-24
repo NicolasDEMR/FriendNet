@@ -5,13 +5,28 @@ import { useState, useEffect } from "react";
 
 function Settings() {
   const [data, setData] = useState({});
+  const [user, setUser] = useState({});
+
+  const getUser = async () => {
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    const response = await fetch(
+      "https://social-network-api.osc-fr1.scalingo.io/friend-net/user",
+      options
+    );
+    const data = await response.json();
+    setUser(data);
+  };
 
   const getData = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     setData(Object.fromEntries(formData));
-
-    editDataAPI();
   };
   const editDataAPI = async () => {
     const options = {
@@ -34,16 +49,24 @@ function Settings() {
     );
     const donnees = await response.json();
     console.log("API Response", donnees);
-
     if (donnees.success == false) {
-      alert(donnees.message);
+      return null;
     } else {
-      alert("Changed profile successfuly");
+      console.log("Changed profile successfuly");
     }
   };
 
   useEffect(() => {
+    getUser();
+  }, [data]);
+
+  useEffect(() => {
+    getData;
     console.log("data : ", data);
+  }, [data]);
+
+  useEffect(() => {
+    editDataAPI();
   }, [data]);
 
   return (
@@ -63,7 +86,7 @@ function Settings() {
               className="form-control border border-dark"
               id="exampleInputName2"
               aria-describedby="First Name"
-              placeholder="First Name"
+              placeholder={user.firstname}
             />
             <input
               type="text"
@@ -71,7 +94,7 @@ function Settings() {
               className="form-control border border-dark"
               id="exampleInputName1"
               aria-describedby="Name"
-              placeholder="Name"
+              placeholder={user.lastname}
             />
           </div>
           <div className="mb-3">
@@ -81,7 +104,7 @@ function Settings() {
               className="form-control border border-dark"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
-              placeholder="Email"
+              placeholder={user.email}
             />
           </div>
           <div className="mb-3">
@@ -91,7 +114,7 @@ function Settings() {
               className="form-control border border-dark"
               id="exampleInputAge1"
               aria-describedby="ageHelp"
-              placeholder="Age"
+              placeholder={user.age}
             />
           </div>
           <div className="mb-3">
@@ -101,7 +124,7 @@ function Settings() {
               className="form-control border border-dark"
               id="exampleInputOccupation1"
               aria-describedby="occupationHelp"
-              placeholder="Occupation"
+              placeholder={user.occupation}
             />
           </div>
           <div className="mb-3"></div>
