@@ -31,12 +31,12 @@ function User() {
       <div className="menuWrapper">
         <Menu />
       </div>
-      <div>
-        <p>{user.firstname}</p>
-        <p>{user.lastname}</p>
-        <p>{user.email}</p>
-        <p>{user.age}</p>
-        <p>{user.occupation}</p>
+      <div className="border border-dark text-light bg-dark">
+        <p className="">firstname: {user.firstname}</p>
+        <p>lastname: {user.lastname}</p>
+        <p>email: {user.email}</p>
+        <p>age: {user.age}</p>
+        <p>occupation: {user.occupation}</p>
       </div>
       <div className="footerWrapper">
         <Footer />
