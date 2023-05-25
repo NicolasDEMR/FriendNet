@@ -3,6 +3,7 @@ import Menu from "../../Layouts/Menu/Menu";
 import Footer from "../../Layouts/Footer/Footer";
 import { useEffect, useState } from "react";
 import Post from "../../Layouts/Post/Post";
+
 function HomeLogged() {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
@@ -22,7 +23,6 @@ function HomeLogged() {
     );
     const data = await response.json();
     setPost(data.posts);
-    console.log("post : ", post);
   };
 
   const getTitle = (e) => {
@@ -64,7 +64,9 @@ function HomeLogged() {
     );
     const data = await response.json();
     console.log("sendPostAPI data : ", data);
-    if (data.success == true) {
+    if (data.success == false) {
+      alert(data.message);
+    } else {
       getPosts();
     }
   };
@@ -89,7 +91,7 @@ function HomeLogged() {
     if (data.success == false) {
       alert(data.message);
     } else {
-      return null;
+      getPosts();
     }
   };
 
@@ -114,12 +116,11 @@ function HomeLogged() {
     if (data.success == false) {
       alert(data.message);
     } else {
-      return null;
+      getPosts();
     }
   };
 
   const displayPost = () => {
-    console.log("post map", post);
     return post.map((e, key) => {
       return (
         <div key={key}>
@@ -153,7 +154,6 @@ function HomeLogged() {
   }, []);
 
   useEffect(() => {
-    console.log("post : ", post);
     // console.log("Array post : ", post);
   }, [setPost]);
 

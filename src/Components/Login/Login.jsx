@@ -49,10 +49,9 @@ function Login() {
     localStorage.setItem("token", token);
   };
 
-  useEffect(() => {
-    getData;
-    console.log("data : ", data);
-  }, []);
+  // useEffect(() => {
+  //   console.log("data : ", data);
+  // }, []);
 
   return (
     <div>
@@ -87,8 +86,8 @@ function Login() {
               placeholder="Password"
             />
           </div>
-          <button type="submit" className="btn btn-dark ">
-            Submit
+          <button type="submit" className="btn btn-dark">
+            Log In
           </button>
         </form>
       </div>
