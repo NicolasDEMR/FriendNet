@@ -12,7 +12,7 @@ function Footer() {
           <i>Contact: contact@friendnet.com </i>
         </p>
         <p>
-          <i>Téléphone: </i>
+          <i>Téléphone: 0000000000</i>
         </p>
       </div>
       <div className="Copyright">
