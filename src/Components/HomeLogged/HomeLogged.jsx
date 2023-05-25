@@ -6,10 +6,10 @@ import Post from "../../Layouts/Post/Post";
 function HomeLogged() {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
-  const [comment, setComment] = useState("");
   const [user, setUser] = useState({});
   const [post, setPost] = useState([]);
-  const [like, setLike] = useState([{}]);
+  const [like, setLike] = useState([]);
+  const [comment, setComment] = useState([]);
 
   const getUser = async () => {
     const options = {
@@ -40,14 +40,15 @@ function HomeLogged() {
   };
 
   const updateComment = (key) => {
-    sendCommentAPI(user);
-    setPost([...post], (post[key].comment += comment));
+    sendCommentAPI(post[key]._id);
+    setComment([...post[key].comments], comment);
+    console.log("Array comment : ", comment);
   };
 
   const updateLike = (key) => {
-    console.log("key du post : ", post[key]._id);
     sendLikeAPI(post[key]._id);
-    // setPost([...post[key].likes], post[key].like);
+    setLike([...post[key].likes], like);
+    console.log("Array like : ", like);
   };
 
   const sendPostAPI = async () => {
@@ -89,6 +90,11 @@ function HomeLogged() {
     );
     const data = await response.json();
     console.log("data sendLikeAPI : ", data);
+    if (data.success == false) {
+      alert(data.message);
+    } else {
+      return null;
+    }
   };
 
   const sendCommentAPI = async (postID) => {
@@ -126,13 +132,11 @@ function HomeLogged() {
     setPost(data.posts);
   };
 
-  const displayLike = () => {
-    return like.map((e, key) => {
+  const displayComment = () => {
+    return comment.map((e, key) => {
       return (
         <div key={key}>
-          <p>
-            👍 {e.firstname} {e.lastname}
-          </p>
+          <Post comment={`${e.firstname} ${e.lastname}`} />
         </div>
       );
     });
@@ -150,10 +154,10 @@ function HomeLogged() {
             title={e.title}
             content={e.content}
             author={`${e.firstname} ${e.lastname}`}
-            like={() => displayLike(key)}
-            comment={e.comments}
+            like={`${e.likes[key]} ${e.likes[key]}`}
+            comment={e.comments[key]}
             handleClick={() => updateLike(key)}
-            getComment={() => getComment(e.value)}
+            getComment={() => getComment(e)}
             handleComment={() => updateComment(key)}
           />
         </div>
