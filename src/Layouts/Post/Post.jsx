@@ -1,7 +1,7 @@
 import "./Post.css";
 function Post(props) {
   return (
-    <div className="containerPost bg-dark text-light ms-5 me-5 pb-2 mb-4">
+    <div className="containerPost bg-dark text-light ms-5 me-5 pb-2 mb-4 mt-4">
       <p>{props.date}</p>
       <h3>{props.title}</h3>
       <p>{props.content}</p>

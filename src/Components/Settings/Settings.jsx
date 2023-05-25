@@ -61,11 +61,6 @@ function Settings() {
   }, [data]);
 
   useEffect(() => {
-    getData;
-    console.log("data : ", data);
-  }, [data]);
-
-  useEffect(() => {
     editDataAPI();
   }, [data]);
 
