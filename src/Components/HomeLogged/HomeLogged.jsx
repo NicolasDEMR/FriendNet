@@ -7,9 +7,8 @@ function HomeLogged() {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [user, setUser] = useState({});
+  const [inputComment, setInputComment] = useState("");
   const [post, setPost] = useState([]);
-  const [like, setLike] = useState([]);
-  const [comment, setComment] = useState([]);
 
   const getUser = async () => {
     const options = {
@@ -36,19 +35,16 @@ function HomeLogged() {
   };
 
   const getComment = (e) => {
-    setComment(e.target.value);
+    setInputComment(e.target.value);
   };
 
   const updateComment = (key) => {
     sendCommentAPI(post[key]._id);
-    setComment([...post[key].comments], comment);
     console.log("Array comment : ", comment);
   };
 
   const updateLike = (key) => {
     sendLikeAPI(post[key]._id);
-    setLike([...post[key].likes], like);
-    console.log("Array like : ", like);
   };
 
   const sendPostAPI = async () => {

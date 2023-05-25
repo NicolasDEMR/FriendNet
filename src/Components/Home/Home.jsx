@@ -30,18 +30,6 @@ function Home() {
     alert("Please log in to like a post");
   };
 
-  const displayLike = () => {
-    return like.map((e, key) => {
-      return (
-        <div key={key}>
-          <p>
-            👍 {e.firstname} {e.lastname}
-          </p>
-        </div>
-      );
-    });
-  };
-
   const displayPost = () => {
     return post.map((e, key) => {
       if (key == 0) {
@@ -54,8 +42,8 @@ function Home() {
             title={e.title}
             content={e.content}
             author={`${e.firstname} ${e.lastname}`}
-            like={() => displayLike(key)}
-            comment={e.comments}
+            like={`${e.likes[key]} ${e.likes[key]}`}
+            comment={e.comments[key]}
             handleClick={() => updateLike(key)}
             getComment={() => getComment(e.value)}
             handleComment={() => updateComment(key)}
