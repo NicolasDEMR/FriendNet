@@ -7,27 +7,13 @@ function Settings() {
   const [data, setData] = useState({});
   const [user, setUser] = useState({});
 
-  const getUser = async () => {
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-    };
-    const response = await fetch(
-      "https://social-network-api.osc-fr1.scalingo.io/friend-net/user",
-      options
-    );
-    const data = await response.json();
-    setUser(data);
-  };
-
   const getData = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     setData(Object.fromEntries(formData));
+    console.log("state data : ", data);
   };
+
   const editDataAPI = async () => {
     const options = {
       method: "PUT",
@@ -54,6 +40,23 @@ function Settings() {
     } else {
       console.log("Changed profile successfuly");
     }
+  };
+
+  const getUser = async () => {
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    const response = await fetch(
+      "https://social-network-api.osc-fr1.scalingo.io/friend-net/user",
+      options
+    );
+    const data = await response.json();
+    setUser(data);
+    // console.log("data getUser", data);
   };
 
   useEffect(() => {
