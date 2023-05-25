@@ -158,7 +158,7 @@ function HomeLogged() {
 
   useEffect(() => {
     sendPostAPI;
-    // console.log("Array post : ", post);
+    console.log("Array post : ", post);
   }, []);
   useEffect(() => {
     getPosts();
@@ -171,7 +171,7 @@ function HomeLogged() {
   }, []);
   useEffect(() => {
     getUser();
-  }, [user]);
+  }, []);
 
   return (
     <div>

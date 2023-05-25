@@ -42,7 +42,7 @@ function Home() {
             title={e.title}
             content={e.content}
             author={`${e.firstname} ${e.lastname}`}
-            like={`${e.likes[key]} ${e.likes[key]}`}
+            like={e.likes.length}
             comment={e.comments[key]}
             handleClick={() => updateLike(key)}
             getComment={() => getComment(e.value)}
@@ -55,6 +55,10 @@ function Home() {
 
   useEffect(() => {
     getPosts();
+  }, []);
+
+  useEffect(() => {
+    displayPost();
   }, []);
 
   return (
