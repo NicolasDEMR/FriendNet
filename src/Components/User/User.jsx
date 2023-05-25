@@ -40,6 +40,14 @@ function User() {
     setPost(data.posts);
   };
 
+  const updateComment = () => {
+    alert("You can only comment from home page");
+  };
+
+  const updateLike = () => {
+    alert("You can only like from home page");
+  };
+
   const displayPost = () => {
     return post.map((e, key) => {
       if (key == 0) {
