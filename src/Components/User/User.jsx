@@ -60,8 +60,8 @@ function User() {
             title={e.title}
             content={e.content}
             author={`${e.firstname} ${e.lastname}`}
-            like={() => displayLike(key)}
-            comment={e.comments}
+            like={`${e.likes[key]} ${e.likes[key]}`}
+            comment={e.comments[key]}
             handleClick={() => updateLike(key)}
             getComment={() => getComment(e.value)}
             handleComment={() => updateComment(key)}

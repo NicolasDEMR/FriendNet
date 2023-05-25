@@ -40,7 +40,7 @@ function HomeLogged() {
 
   const updateComment = (key) => {
     sendCommentAPI(post[key]._id);
-    console.log("Array comment : ", comment);
+    console.log("Array inputComment : ", inputComment);
   };
 
   const updateLike = (key) => {
@@ -102,7 +102,7 @@ function HomeLogged() {
       },
       body: JSON.stringify({
         postId: postID,
-        content: comment,
+        content: inputComment,
       }),
     };
     const response = await fetch(
@@ -111,6 +111,11 @@ function HomeLogged() {
     );
     const data = await response.json();
     console.log("data sendCommentAPI : ", data);
+    if (data.success == false) {
+      alert(data.message);
+    } else {
+      return null;
+    }
   };
 
   const getPosts = async () => {
@@ -126,16 +131,6 @@ function HomeLogged() {
     );
     const data = await response.json();
     setPost(data.posts);
-  };
-
-  const displayComment = () => {
-    return comment.map((e, key) => {
-      return (
-        <div key={key}>
-          <Post comment={`${e.firstname} ${e.lastname}`} />
-        </div>
-      );
-    });
   };
 
   const displayPost = () => {

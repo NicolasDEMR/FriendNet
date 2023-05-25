@@ -8,10 +8,8 @@ function Post(props) {
       <p>
         <i>{props.author}</i>
       </p>
-      <ul className="listeComment">
-        <li>{props.comment}</li>
-      </ul>
-      <div className="d-flex gap-2 justify-content-center text-light">
+      <p>{props.comment}</p>
+      <div className="d-flex gap-2 justify-content-center align-items-center text-light">
         <button
           className="border border-0 rounded-pill "
           onClick={props.handleClick}
