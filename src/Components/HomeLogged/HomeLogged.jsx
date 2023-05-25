@@ -6,25 +6,23 @@ import Post from "../../Layouts/Post/Post";
 function HomeLogged() {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
-  const [user, setUser] = useState({});
   const [inputComment, setInputComment] = useState("");
   const [post, setPost] = useState([]);
 
-  const getUser = async () => {
+  const getPosts = async () => {
     const options = {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `bearer ${localStorage.getItem("token")}`,
       },
     };
     const response = await fetch(
-      "https://social-network-api.osc-fr1.scalingo.io/friend-net/user",
+      "https://social-network-api.osc-fr1.scalingo.io/friend-net/posts?page=0&limit=40",
       options
     );
     const data = await response.json();
-    setUser(data);
-    // console.log("user : ", user);
+    setPost(data.posts);
+    console.log("post : ", post);
   };
 
   const getTitle = (e) => {
@@ -66,7 +64,7 @@ function HomeLogged() {
     );
     const data = await response.json();
     console.log("sendPostAPI data : ", data);
-    getUser();
+    getPosts();
   };
 
   const sendLikeAPI = async (postID) => {
@@ -118,22 +116,6 @@ function HomeLogged() {
     }
   };
 
-  const getPosts = async () => {
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    const response = await fetch(
-      "https://social-network-api.osc-fr1.scalingo.io/friend-net/posts?page=0&limit=40",
-      options
-    );
-    const data = await response.json();
-    setPost(data.posts);
-    console.log("post : ", post);
-  };
-
   const displayPost = () => {
     return post.map((e, key) => {
       if (key == 0) {
@@ -147,7 +129,15 @@ function HomeLogged() {
             content={e.content}
             author={`${e.firstname} ${e.lastname}`}
             like={e.likes.length}
-            comment={e.comments[key]}
+            comment={e.comments.map((e, key) => {
+              return (
+                <ul className="liste" key={key}>
+                  <li>
+                    {e.firstname} {e.lastname} : {e.content}
+                  </li>
+                </ul>
+              );
+            })}
             handleClick={() => updateLike(key)}
             getComment={(e) => getComment(e)}
             handleComment={() => updateComment(key)}

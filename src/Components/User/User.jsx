@@ -61,9 +61,17 @@ function User() {
             content={e.content}
             author={`${e.firstname} ${e.lastname}`}
             like={e.likes.length}
-            comment={e.comments[key]}
+            comment={e.comments.map((e, key) => {
+              return (
+                <ul className="liste" key={key}>
+                  <li>
+                    {e.firstname} {e.lastname} : {e.content}
+                  </li>
+                </ul>
+              );
+            })}
             handleClick={() => updateLike(key)}
-            getComment={() => getComment(e.value)}
+            getComment={(e) => getComment(e)}
             handleComment={() => updateComment(key)}
           />
         </div>

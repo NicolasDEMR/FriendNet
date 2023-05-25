@@ -1,3 +1,6 @@
 body {
   background-color: wheat;
 }
+.liste {
+  list-style-type: none;
+}

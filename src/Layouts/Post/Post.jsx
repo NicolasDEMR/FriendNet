@@ -8,7 +8,7 @@ function Post(props) {
       <p>
         <i>{props.author}</i>
       </p>
-      <p>{props.comment}</p>
+      <div>Commentaires : {props.comment}</div>
       <div className="d-flex gap-2 justify-content-center align-items-center text-light">
         <button
           className="border border-0 rounded-pill "
