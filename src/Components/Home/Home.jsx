@@ -32,9 +32,6 @@ function Home() {
 
   const displayPost = () => {
     return post.map((e, key) => {
-      if (key == 0) {
-        return null;
-      }
       return (
         <div key={key}>
           <Post
