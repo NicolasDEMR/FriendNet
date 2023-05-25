@@ -24,6 +24,7 @@ function HomeLogged() {
     );
     const data = await response.json();
     setUser(data);
+    // console.log("user : ", user);
   };
 
   const getTitle = (e) => {
@@ -40,7 +41,7 @@ function HomeLogged() {
 
   const updateComment = (key) => {
     sendCommentAPI(post[key]._id);
-    console.log("Array inputComment : ", inputComment);
+    // console.log("Array inputComment : ", inputComment);
   };
 
   const updateLike = (key) => {
@@ -66,7 +67,6 @@ function HomeLogged() {
     const data = await response.json();
     console.log("sendPostAPI data : ", data);
     getUser();
-    getPosts();
   };
 
   const sendLikeAPI = async (postID) => {
@@ -131,6 +131,7 @@ function HomeLogged() {
     );
     const data = await response.json();
     setPost(data.posts);
+    console.log("post : ", post);
   };
 
   const displayPost = () => {
@@ -148,7 +149,7 @@ function HomeLogged() {
             like={e.likes.length}
             comment={e.comments[key]}
             handleClick={() => updateLike(key)}
-            getComment={() => getComment(e)}
+            getComment={(e) => getComment(e)}
             handleComment={() => updateComment(key)}
           />
         </div>
@@ -157,20 +158,8 @@ function HomeLogged() {
   };
 
   useEffect(() => {
-    sendPostAPI;
-    console.log("Array post : ", post);
-  }, []);
-  useEffect(() => {
     getPosts();
-  }, []);
-  useEffect(() => {
-    setPost;
-  }, []);
-  useEffect(() => {
-    displayPost();
-  }, []);
-  useEffect(() => {
-    getUser();
+    // console.log("Array post : ", post);
   }, []);
 
   return (

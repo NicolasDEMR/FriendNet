@@ -52,11 +52,7 @@ function Login() {
   useEffect(() => {
     getData;
     console.log("data : ", data);
-  }, [setData, data]);
-
-  useEffect(() => {
-    sendDataAPI();
-  }, [data]);
+  }, []);
 
   return (
     <div>
@@ -67,6 +63,7 @@ function Login() {
         <form
           className="d-flex flex-column w-50 justify-content-center"
           onSubmit={getData}
+          {...sendDataAPI()}
         >
           <div className="mb-3">
             <input
