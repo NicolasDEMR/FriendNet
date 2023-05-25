@@ -164,6 +164,9 @@ function HomeLogged() {
     getPosts();
   }, []);
   useEffect(() => {
+    displayPost();
+  }, []);
+  useEffect(() => {
     getUser();
   }, [user]);
 

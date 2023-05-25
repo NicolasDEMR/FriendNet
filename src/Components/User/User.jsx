@@ -79,6 +79,10 @@ function User() {
     getPosts();
   }, []);
 
+  useEffect(() => {
+    displayPost();
+  }, []);
+
   return (
     <div>
       <div className="menuWrapper ">
