@@ -1,14 +1,13 @@
 import "./Post.css";
 function Post(props) {
   return (
-    <div className="containerPost bg-dark text-light ms-5 me-5 pb-2">
+    <div className="containerPost bg-dark text-light ms-5 me-5 pb-2 mb-4">
       <p>{props.date}</p>
       <h3>{props.title}</h3>
       <p>{props.content}</p>
       <p>
         <i>{props.author}</i>
       </p>
-      <div>Commentaires : {props.comment}</div>
       <div className="d-flex gap-2 justify-content-center align-items-center text-light">
         <button
           className="border border-0 rounded-pill "
@@ -47,6 +46,7 @@ function Post(props) {
           </svg>
         </button>
       </div>
+      <div className="borderr mt-4">{props.comment}</div>
     </div>
   );
 }
