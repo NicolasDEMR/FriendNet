@@ -17,7 +17,7 @@ function HomeLogged() {
       },
     };
     const response = await fetch(
-      "https://social-network-api.osc-fr1.scalingo.io/friend-net/posts?page=0&limit=40",
+      "https://social-network-api.osc-fr1.scalingo.io/friend-net/posts?page=0&limit=20",
       options
     );
     const data = await response.json();
@@ -64,7 +64,9 @@ function HomeLogged() {
     );
     const data = await response.json();
     console.log("sendPostAPI data : ", data);
-    getPosts();
+    if (data.success == true) {
+      getPosts();
+    }
   };
 
   const sendLikeAPI = async (postID) => {
@@ -117,10 +119,8 @@ function HomeLogged() {
   };
 
   const displayPost = () => {
+    console.log("post map", post);
     return post.map((e, key) => {
-      if (key == 0) {
-        return null;
-      }
       return (
         <div key={key}>
           <Post
@@ -151,6 +151,11 @@ function HomeLogged() {
     getPosts();
     // console.log("Array post : ", post);
   }, []);
+
+  useEffect(() => {
+    console.log("post : ", post);
+    // console.log("Array post : ", post);
+  }, [setPost]);
 
   return (
     <div>
