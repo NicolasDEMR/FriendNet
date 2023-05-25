@@ -164,6 +164,9 @@ function HomeLogged() {
     getPosts();
   }, []);
   useEffect(() => {
+    setPost;
+  }, []);
+  useEffect(() => {
     displayPost();
   }, []);
   useEffect(() => {
