@@ -8,6 +8,7 @@ function User() {
   const [user, setUser] = useState({});
   const [post, setPost] = useState([]);
 
+  // Récupère les données dans l'API avec une requête HTML GET
   const getUser = async () => {
     const options = {
       method: "GET",
@@ -21,9 +22,11 @@ function User() {
       options
     );
     const data = await response.json();
+    // Récupère les données dans le state user
     setUser(data);
   };
 
+  // Récupération des posts avec une requête HTML GET
   const getPosts = async () => {
     const options = {
       method: "GET",
@@ -36,17 +39,21 @@ function User() {
       options
     );
     const data = await response.json();
+    // Récupère les données dans le state post
     setPost(data.posts);
   };
 
+  // Informe l'utilisateur qu'il doit être sur la page Home pour commenter
   const updateComment = () => {
     alert("You can only comment from home page");
   };
 
+  // Informe l'utilisateur qu'il doit être sur la page Home pour like
   const updateLike = () => {
     alert("You can only like from home page");
   };
 
+  // Affiche le tableau stocké dans le state post avec la méthode map
   const displayPost = () => {
     return post.map((e, key) => {
       return (
@@ -57,6 +64,7 @@ function User() {
             content={e.content}
             author={`${e.firstname} ${e.lastname}`}
             like={e.likes.length}
+            // Affiche le tableau comments stocké dans le tableau post avec la méthode map
             comment={e.comments.map((e, key) => {
               return (
                 <ul className="liste" key={key}>
@@ -66,6 +74,7 @@ function User() {
                 </ul>
               );
             })}
+            // Appelle les fonctions qui se chargent de l'intéraction avec les boutons & inputs
             handleClick={() => updateLike(key)}
             getComment={(e) => getComment(e)}
             handleComment={() => updateComment(key)}
@@ -75,6 +84,7 @@ function User() {
     });
   };
 
+  // Utilisation du hook useEffect pour rafraichir les posts et les données de l'utilisateur
   useEffect(() => {
     getUser();
   }, []);

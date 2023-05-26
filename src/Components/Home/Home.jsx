@@ -7,6 +7,7 @@ import Post from "../../Layouts/Post/Post";
 function Home() {
   const [post, setPost] = useState([]);
 
+  // Récupération des posts avec une requête HTML GET
   const getPosts = async () => {
     const options = {
       method: "GET",
@@ -19,17 +20,21 @@ function Home() {
       options
     );
     const data = await response.json();
+    // Sauvegarde dans le state post la réponse de l'API
     setPost(data.posts);
   };
 
+  // Informe l'utilisateur qu'il doit se connecter pour commenter
   const updateComment = () => {
     alert("Please log in to comment");
   };
 
+  // Informe l'utilisateur qu'il doit se connecter pour like
   const updateLike = () => {
     alert("Please log in to like a post");
   };
 
+  // Affiche le tableau stocké dans le state post avec la méthode map
   const displayPost = () => {
     return post.map((e, key) => {
       return (
@@ -40,6 +45,7 @@ function Home() {
             content={e.content}
             author={`${e.firstname} ${e.lastname}`}
             like={e.likes.length}
+            // Affiche le tableau comments stocké dans le tableau post avec la méthode map
             comment={e.comments.map((e, key) => {
               return (
                 <ul className="liste" key={key}>
@@ -49,6 +55,7 @@ function Home() {
                 </ul>
               );
             })}
+            // Appelle les fonctions qui se chargent de l'intéraction avec les boutons & inputs
             handleClick={() => updateLike(key)}
             getComment={(e) => getComment(e)}
             handleComment={() => updateComment(key)}
@@ -58,6 +65,7 @@ function Home() {
     });
   };
 
+  // Utilisation du hook useEffect pour rafraichir les posts
   useEffect(() => {
     getPosts();
   }, []);

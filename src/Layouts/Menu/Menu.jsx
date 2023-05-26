@@ -2,6 +2,7 @@ import "./Menu.css";
 import { Link } from "react-router-dom";
 
 function Menu() {
+  // Fonction pour gérer la déconnexion
   const logOff = () => {
     localStorage.removeItem("token");
   };
@@ -22,6 +23,7 @@ function Menu() {
         <h1>Friend Net</h1>
       </div>
       <nav className="d-flex justify-content-center align-items-center gap-1">
+        {/* Affichage conditionnel des boutons selon la connexion */}
         {localStorage.getItem("token") === null ? (
           <Link to="/">
             <button className="btn btn-dark">
@@ -53,6 +55,7 @@ function Menu() {
             </button>
           </Link>
         )}
+        {/* Affichage conditionnel des boutons selon la connexion */}
         {localStorage.getItem("token") === null ? (
           <Link to="/login">
             <button className="btn btn-dark">
@@ -86,6 +89,7 @@ function Menu() {
             </button>
           </Link>
         )}
+        {/* Affichage conditionnel des boutons selon la connexion */}
         {localStorage.getItem("token") === null ? (
           <Link to="/register">
             <button className="btn btn-dark">
@@ -102,7 +106,7 @@ function Menu() {
             </button>
           </Link>
         ) : null}
-
+        {/* Affichage conditionnel des boutons selon la connexion */}
         {localStorage.getItem("token") === null ? null : (
           <Link to="/settings">
             <button className="btn btn-dark">
@@ -120,6 +124,7 @@ function Menu() {
             </button>
           </Link>
         )}
+        {/* Affichage conditionnel des boutons selon la connexion */}
         {localStorage.getItem("token") === null ? null : (
           <Link to="/user">
             <button className="btn btn-dark">

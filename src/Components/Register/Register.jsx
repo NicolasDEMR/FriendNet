@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 function Register() {
   const [data, setData] = useState({});
 
+  // Récupération des données saisies dans les inputs
   const getData = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -15,6 +16,7 @@ function Register() {
     sendDataAPI();
   };
 
+  // Envoi des données dans l'API avec une requête HTML POST
   const sendDataAPI = async () => {
     const options = {
       method: "POST",
@@ -38,10 +40,12 @@ function Register() {
     if (donnees.success == false) {
       return null;
     } else {
+      // Si la requête est un succès, connecte l'utilisateur directement
       sendDataLoginAPI();
     }
   };
 
+  // Envoi des données dans l'API avec une requête HTML POST
   const sendDataLoginAPI = async () => {
     const options = {
       method: "POST",
@@ -63,15 +67,18 @@ function Register() {
     if (donnees.success == false) {
       return null;
     } else {
+      // Si la requête est un succès, connecte l'utilisateur et le redirige vers la page de profil, puis récupère le token
       getToken(donnees.token);
       redirectProfile();
     }
   };
 
+  // Récupère le token et le stocke dans le localStorage
   const getToken = (token) => {
     localStorage.setItem("token", token);
   };
 
+  // Fonction utilisé pour rediriger l'utilisateur vers sa page de profil
   let navigate = useNavigate();
   const redirectProfile = () => {
     let path = "/user";
@@ -90,6 +97,7 @@ function Register() {
   useEffect(() => {
     sendDataLoginAPI();
   }, []);
+
   return (
     <div>
       <div className="menuWrapper">

@@ -10,6 +10,7 @@ function HomeLogged() {
   const [inputComment, setInputComment] = useState("");
   const [post, setPost] = useState([]);
 
+  // Récupération des posts avec une requête HTML GET
   const getPosts = async () => {
     const options = {
       method: "GET",
@@ -22,9 +23,11 @@ function HomeLogged() {
       options
     );
     const data = await response.json();
+    // Sauvegarde dans le state post la réponse de l'API
     setPost(data.posts);
   };
 
+  // Récupération des valeurs des inputs
   const getTitle = (e) => {
     setTitle(e.target.value);
   };
@@ -37,15 +40,18 @@ function HomeLogged() {
     setInputComment(e.target.value);
   };
 
+  // Fonction qui gère les commentaires
   const updateComment = (key) => {
     sendCommentAPI(post[key]._id);
     // console.log("Array inputComment : ", inputComment);
   };
 
+  // Fonction qui gère les likes
   const updateLike = (key) => {
     sendLikeAPI(post[key]._id);
   };
 
+  // Envoi des données dans l'API avec une requête HTML POST
   const sendPostAPI = async () => {
     const options = {
       method: "POST",
@@ -67,10 +73,12 @@ function HomeLogged() {
     if (data.success == false) {
       alert(data.message);
     } else {
+      // Si la requête est un succès, réactualise les posts
       getPosts();
     }
   };
 
+  // Envoi des données dans l'API avec une requête HTML POST
   const sendLikeAPI = async (postID) => {
     const options = {
       method: "POST",
@@ -91,10 +99,12 @@ function HomeLogged() {
     if (data.success == false) {
       alert(data.message);
     } else {
+      // Si la requête est un succès, réactualise les posts
       getPosts();
     }
   };
 
+  // Envoi des données dans l'API avec une requête HTML POST
   const sendCommentAPI = async (postID) => {
     const options = {
       method: "POST",
@@ -116,10 +126,12 @@ function HomeLogged() {
     if (data.success == false) {
       alert(data.message);
     } else {
+      // Si la requête est un succès, réactualise les posts
       getPosts();
     }
   };
 
+  // Affiche le tableau stocké dans le state post avec la méthode map
   const displayPost = () => {
     return post.map((e, key) => {
       return (
@@ -130,6 +142,7 @@ function HomeLogged() {
             content={e.content}
             author={`${e.firstname} ${e.lastname}`}
             like={e.likes.length}
+            // Affiche le tableau comments stocké dans le tableau post avec la méthode map
             comment={e.comments.map((e, key) => {
               return (
                 <ul className="liste" key={key}>
@@ -139,6 +152,7 @@ function HomeLogged() {
                 </ul>
               );
             })}
+            // Appelle les fonctions qui se chargent de l'intéraction avec les boutons & inputs
             handleClick={() => updateLike(key)}
             getComment={(e) => getComment(e)}
             handleComment={() => updateComment(key)}
@@ -148,6 +162,7 @@ function HomeLogged() {
     });
   };
 
+  // Utilisation du hook useEffect pour rafraichir les posts
   useEffect(() => {
     getPosts();
     // console.log("Array post : ", post);

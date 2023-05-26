@@ -28,6 +28,7 @@ function Post(props) {
         <input
           type="text"
           className=" border border-0 rounded-pill"
+          placeholder="Write your comment"
           onChange={props.getComment}
         />
         <button

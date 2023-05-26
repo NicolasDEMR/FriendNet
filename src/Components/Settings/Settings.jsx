@@ -7,6 +7,7 @@ function Settings() {
   const [data, setData] = useState({});
   const [user, setUser] = useState({});
 
+  // Récupération des données saisies dans les inputs
   const getData = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -14,6 +15,7 @@ function Settings() {
     console.log("state data : ", data);
   };
 
+  // Remplace les données dans l'API avec une requête HTML PUT
   const editDataAPI = async () => {
     const options = {
       method: "PUT",
@@ -42,6 +44,7 @@ function Settings() {
     }
   };
 
+  // Récupère les données dans l'API avec une requête HTML GET
   const getUser = async () => {
     const options = {
       method: "GET",
@@ -55,6 +58,7 @@ function Settings() {
       options
     );
     const data = await response.json();
+    // Récupère les données dans le state user
     setUser(data);
     // console.log("data getUser", data);
   };
