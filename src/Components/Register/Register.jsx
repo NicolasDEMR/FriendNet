@@ -63,8 +63,13 @@ function Register() {
     if (donnees.success == false) {
       return null;
     } else {
+      getToken(donnees.token);
       redirectProfile();
     }
+  };
+
+  const getToken = (token) => {
+    localStorage.setItem("token", token);
   };
 
   let navigate = useNavigate();
